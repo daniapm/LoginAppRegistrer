@@ -3,6 +3,7 @@ package com.example.loginappregistrer.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.loginappregistrer.domain.model.Users
 
 
 @Entity(tableName = "registerData")
@@ -21,9 +22,21 @@ data class RegisterData(
     var userName: String,
 
     @ColumnInfo(name = "password")
-    var passwrd: String,
+    var password: String,
 
     @ColumnInfo(name = "confirm_password")
     var confirmPassword: String,
 
     )
+
+fun RegisterData.mapToDomain():  Users {
+    return with(this) {
+        Users(
+        firstName = firstName,
+        lastName = lastName,
+        userName = userName,
+        password = password,
+        confirmPassword = confirmPassword
+        )
+    }
+}
