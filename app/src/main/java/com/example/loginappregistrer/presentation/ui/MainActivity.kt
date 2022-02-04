@@ -1,4 +1,4 @@
-package com.example.loginappregistrer.presentation
+package com.example.loginappregistrer.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
