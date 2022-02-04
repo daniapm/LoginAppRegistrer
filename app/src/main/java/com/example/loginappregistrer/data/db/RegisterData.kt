@@ -22,10 +22,7 @@ data class RegisterData(
     var userName: String,
 
     @ColumnInfo(name = "password")
-    var password: String,
-
-    @ColumnInfo(name = "confirm_password")
-    var confirmPassword: String,
+    var password: String
 
     )
 
@@ -35,8 +32,7 @@ fun RegisterData.mapToDomain():  Users {
         firstName = firstName,
         lastName = lastName,
         userName = userName,
-        password = password,
-        confirmPassword = confirmPassword
+        password = password
         )
     }
 }
