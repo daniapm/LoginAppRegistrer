@@ -10,7 +10,7 @@ data class UserResponse(
     @SerializedName("password") val password: String
 )
 
-fun UserResponse.mapToData(): RegisterData {
+fun UserResponse.mapToData(): RegisterData{
     return with(this) {
             RegisterData(
                 firstName = firstName,

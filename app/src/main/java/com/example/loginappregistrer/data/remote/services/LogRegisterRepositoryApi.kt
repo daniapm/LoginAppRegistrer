@@ -1,19 +1,17 @@
 package com.example.loginappregistrer.data.remote.services
 
 import com.example.loginappregistrer.data.remote.model.UserResponse
-import com.example.loginappregistrer.data.remote.model.UsersResponse
 import retrofit2.http.*
-import java.net.PasswordAuthentication
 
 interface LogRegisterRepositoryApi {
     @GET("users")
-    suspend fun getUsers(): UsersResponse
+    suspend fun getUsers(): List<UserResponse>
 
     @GET("users")
     suspend fun getLogin(
         @Query("userName") user_name: String,
         @Query("password") password: String
-    ): UsersResponse
+    ): UserResponse
 
     @FormUrlEncoded
     @POST("users")
@@ -23,5 +21,4 @@ interface LogRegisterRepositoryApi {
         @Field("username") userName: String,
         @Field("password") password: String
     ): UserResponse
-
 }
