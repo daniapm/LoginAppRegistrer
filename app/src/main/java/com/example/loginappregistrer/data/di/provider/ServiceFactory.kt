@@ -19,29 +19,14 @@ object ServiceFactory {
 
     @Singleton
     @Provides
-    fun providesHttpLoggingInterceptor() = HttpLoggingInterceptor()
-        .apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-    @Singleton
-    @Provides
-    fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient
-            .Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
             .build()
 
     @Singleton
     @Provides
     fun provideLogRegisterApi(): LogRegisterRepositoryApi =
-        provideRetrofit(okHttpClient = OkHttpClient()).create(LogRegisterRepositoryApi::class.java)
+        provideRetrofit().create(LogRegisterRepositoryApi::class.java)
 }

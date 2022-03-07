@@ -7,7 +7,14 @@ data class UserResponse(
     @SerializedName("name") val firstName: String,
     @SerializedName("last_name") val lastName: String,
     @SerializedName("username") val userName: String,
-    @SerializedName("password") val password: String
+    @SerializedName("password") val password: String,
+    @SerializedName("balance") val balance: Int,
+    @SerializedName("id") val id: Int,
+    @SerializedName("userId") val userId: Int,
+    @SerializedName("saldo") val saldo: Int
+
+
+
 )
 
 fun UserResponse.mapToData(): RegisterData{
@@ -16,7 +23,8 @@ fun UserResponse.mapToData(): RegisterData{
                 firstName = firstName,
                 lastName = lastName,
                 userName = userName,
-                password = password
+                password = password,
+                balance = balance
             )
     }
 }

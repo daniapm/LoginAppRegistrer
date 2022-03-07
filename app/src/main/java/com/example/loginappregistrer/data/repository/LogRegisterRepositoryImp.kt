@@ -17,11 +17,11 @@ class LogRegisterRepositoryImp @Inject constructor(
 ) : LogRegisterRepository {
 
     override suspend fun getUsers(): Result<List<User>, Exception> = try {
-        val users = withContext(Dispatchers.IO) {
-            userRemoteDataSource.logRegisterRepositoryApi.getUsers()
+        withContext(Dispatchers.IO) {
+            val users = userRemoteDataSource.logRegisterRepositoryApi.getUsers().map { it.mapToData() }
+            registerDao.insertAll(users)
+            Result.Success(registerDao.getAllUser().map { user -> user.mapToDomain() })
         }
-        registerDao.insertAll(users.map { user -> user.mapToData() })
-        Result.Success(registerDao.getAllUser().map { user -> user.mapToDomain() })
     } catch (e: Exception) {
         Result.Error(e)
     }
