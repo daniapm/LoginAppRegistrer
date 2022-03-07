@@ -3,14 +3,14 @@ package com.example.loginappregistrer.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.loginappregistrer.domain.model.Users
+import com.example.loginappregistrer.domain.model.User
 
 
 @Entity(tableName = "registerData")
 data class RegisterData(
 
     @PrimaryKey(autoGenerate = true)
-    var UserId: Int = 0,
+    var userId: Int = 0,
 
     @ColumnInfo(name = "first_name")
     var firstName: String,
@@ -22,17 +22,22 @@ data class RegisterData(
     var userName: String,
 
     @ColumnInfo(name = "password")
-    var password: String
+    var password: String,
 
-    )
+    @ColumnInfo(name = "balance")
+    var balance: Int
 
-fun RegisterData.mapToDomain():  Users {
+)
+
+fun RegisterData.mapToDomain(): User {
     return with(this) {
-        Users(
-        firstName = firstName,
-        lastName = lastName,
-        userName = userName,
-        password = password
+        User(
+            firstName = firstName,
+            lastName = lastName,
+            userName = userName,
+            password = password,
+            balance = balance,
+            id = userId
         )
     }
 }
